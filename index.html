@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <title>English B2 Prep</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Registers SW early -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      });
+    }
+  </script>
+
+  <header class="appbar" id="appbar" style="display:none;">
+    <div class="brand" onclick="router.go('home')">B2</div>
+    <h1 id="bar-title">English B2</h1>
+    <div class="day-chip" id="day-chip">Día 1/28</div>
+  </header>
+
+  <!-- ===== WELCOME ===== -->
+  <div class="screen active" id="scr-welcome">
+    <div class="welcome-hero">
+      <div class="logo">B2</div>
+      <h2>Prepárate para el B2</h2>
+      <p>British Council · Nivel B2 · Requisito universitario</p>
+      <span class="badge-days">📅 28 días para el examen</span>
+    </div>
+
+    <div class="card" style="background:var(--card2);">
+      <ul class="feat">
+        <li><span class="ic">🔤</span><span><b>Grammar</b> · Explicación, actividades, evaluación</span></li>
+        <li><span class="ic">💬</span><span><b>Speaking</b> · Pronunciación con audio</span></li>
+        <li><span class="ic">🎧</span><span><b>Listening</b> · Audio y comprensión</span></li>
+        <li><span class="ic">📖</span><span><b>Reading</b> · Textos y preguntas</span></li>
+        <li><span class="ic">🏆</span><span><b>Examen final</b> con tu calificación B2</span></li>
+        <li><span class="ic">🇪🇸</span><span><b>Traducción</b> de cada explicación (EN/ES)</span></li>
+        <li><span class="ic">📚</span><span><b>Diccionario</b> · toca una palabra para ver su significado</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 class="sec-head" style="margin-top:0;">Tu plan de 28 días</h3>
+      <p class="note" style="margin-bottom:12px;">28 días · Cada día practicas los 4 aspectos (Grammar, Reading, Listening, Speaking). Meta: 45 min–1 h al día. Cada tema: Explicación → Actividades → Evaluación.</p>
+      <div class="progress-line" id="welcome-progress"></div>
+      <div style="height:14px;"></div>
+      <button class="btn" id="btn-start">Comenzar →</button>
+    </div>
+
+    <button class="btn secondary" id="btn-install" style="display:none;">📲 Instalar app en mi teléfono</button>
+    <button class="btn ghost" id="btn-reset" style="margin-top:10px;">Reiniciar todo el progreso</button>
+    <div style="height:8px;"></div>
+  </div>
+
+  <!-- ===== HOME ===== -->
+  <div class="screen" id="scr-home">
+    <h2 class="title">Hoy en tu plan 📅</h2>
+    <p class="desc" id="home-desc">Tu objetivo diario: 45 min – 1 h. Practica los 4 aspectos cada día.</p>
+
+    <div class="card">
+      <div class="progress-ring-wrap">
+        <div class="progress-info">
+          <div class="big" id="home-overall">0% completado</div>
+          <div class="small">Progreso general del plan</div>
+        </div>
+      </div>
+      <div class="bar"><div class="fill" id="home-bar" style="width:0%"></div></div>
+      <div class="progress-line" id="home-progress-line"></div>
+    </div>
+
+    <h3 class="sec-head">💪 Los 4 aspectos del examen</h3>
+    <div class="aspect-grid" id="aspect-grid"></div>
+
+    <h3 class="sec-head">📅 Tu plan de 28 días</h3>
+    <div id="plan-list"></div>
+
+    <h3 class="sec-head">🏆 Examen final</h3>
+    <div class="card tap" id="final-exam-card">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="font-size:28px;">🏆</div>
+        <div style="flex:1;">
+          <div style="font-weight:700;">Examen completo B2</div>
+          <div class="small" style="font-size:12px;color:var(--muted);" id="final-exam-status">Reúne todos los aspectos y calcula tu calificación.</div>
+        </div>
+        <div style="font-size:18px;color:var(--muted);">→</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DAY DETAIL (4 sections) ===== -->
+  <div class="screen" id="scr-day">
+    <div class="btn ghost" style="width:auto;padding:8px 14px;margin-bottom:6px;" onclick="router.back()">← Volver</div>
+    <h2 class="title" id="day-title"></h2>
+    <p class="desc" id="day-desc"></p>
+    <div id="day-area"></div>
+  </div>
+
+  <!-- ===== SECTION VIEWER (explain → activity → evaluation) ===== -->
+  <div class="screen" id="scr-section">
+    <div class="btn ghost" style="width:auto;padding:8px 14px;margin-bottom:6px;" onclick="router.back()">← Volver</div>
+    <h2 class="title" id="sec-title"></h2>
+    <p class="desc" id="sec-desc"></p>
+    <div id="sec-area"></div>
+    <div class="btn-row" id="sec-nav" style="display:none;">
+      <button class="btn ghost" id="sec-prev">← Anterior</button>
+      <button class="btn" id="sec-next">Siguiente →</button>
+    </div>
+    <div id="sec-complete" style="display:none;"></div>
+  </div>
+
+  <!-- ===== FINAL EXAM ===== -->
+  <div class="screen" id="scr-exam">
+    <div class="btn ghost" style="width:auto;padding:8px 14px;margin-bottom:6px;" onclick="router.go('home')">← Salir del examen</div>
+    <h2 class="title">🏆 Examen Final B2</h2>
+    <p class="desc" id="exam-intro"></p>
+    <div id="exam-area"></div>
+  </div>
+
+  <!-- ===== RESULTS ===== -->
+  <div class="screen" id="scr-results">
+    <div class="result-score">
+      <div class="grade" id="res-grade">B2</div>
+      <div id="res-band" class="band"></div>
+      <div id="res-pct" style="font-size:20px;font-weight:800;margin-top:8px;"></div>
+    </div>
+    <div class="card">
+      <h3 class="sec-head" style="margin-top:0;">Puntaje por aspecto</h3>
+      <table class="score-table" id="res-table"></table>
+      <div class="verbatim-note">⚠️ Simulación de práctica. Recuerda: aproximar una calificación exacta de un examen oficial requiere examen real con criterios oficiales del British Council.</div>
+    </div>
+    <div class="card">
+      <h3 class="sec-head" style="margin-top:0;">💡 Recomendaciones</h3>
+      <div id="res-recs"></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn ghost" onclick="router.go('home')">Volver al inicio</button>
+    </div>
+    <div style="height:10px;"></div>
+  </div>
+
+  <nav class="bottom-nav" id="bottom-nav" style="display:none;">
+    <button data-nav="home" onclick="router.go('home')"><span class="ico">🏠</span>Inicio</button>
+    <button data-nav="plan" onclick="router.go('home')"><span class="ico">📅</span>Plan</button>
+    <button data-nav="exam" onclick="router.go('exam')"><span class="ico">🏆</span>Examen</button>
+    <button data-nav="progress" onclick="router.go('home')"><span class="ico">📊</span>Progreso</button>
+  </nav>
+
+  <script src="data.js"></script>
+  <script src="dict.js"></script>
+  <script src="days_1to7.js"></script>
+  <script src="days_8to14.js"></script>
+  <script src="days_15to21.js"></script>
+  <script src="days_22to28.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
