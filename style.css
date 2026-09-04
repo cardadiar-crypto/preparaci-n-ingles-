@@ -254,39 +254,3 @@ ul.feat .ic { width: 30px; height: 30px; border-radius: 8px; background: var(--c
   border: 1px solid var(--yellow); color: var(--yellow); border-radius: 14px;
   padding: 12px 14px; font-size: 13.5px; font-weight: 700; margin: 0 0 14px;
 }
-
-/* ===== V2: Listening hidden-text + Speaking oral ===== */
-.q-block { border-top: 1px dashed rgba(255,255,255,.08); padding-top: 14px; }
-.listen-q-head { display: flex; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
-.listen-q-head .btn { width: auto; padding: 9px 14px; font-size: 13px; }
-.listen-transcript {
-  background: var(--card2); border-left: 3px solid var(--yellow); border-radius: 10px;
-  padding: 10px 12px; font-size: 13.5px; line-height: 1.6; margin-bottom: 8px; color: var(--text);
-}
-.listen-transcript.hidden { display: none; }
-.listen-note { font-size: 13px; color: var(--yellow); margin-top: 10px; }
-
-.oral-block { border-top: 1px dashed rgba(255,255,255,.08); padding-top: 14px; }
-.oral-actions { margin: 8px 0; }
-.oral-actions .btn { width: auto; }
-.mic-card {
-  background: var(--card2); border-radius: 14px; padding: 14px; margin-top: 10px;
-  text-align: center; border: 1px solid rgba(255,255,255,.06);
-}
-.mic-btn {
-  width: 64px; height: 64px; border-radius: 50%; border: none; font-size: 28px; cursor: pointer;
-  background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; box-shadow: var(--shadow);
-  transition: transform .1s;
-}
-.mic-btn:active { transform: scale(.92); }
-.mic-btn.rec-on { background: linear-gradient(135deg, var(--red), #b91c1c); animation: pulse 1s infinite; }
-@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.5);} 50%{box-shadow:0 0 0 12px rgba(239,68,68,0);} }
-.mic-status { font-size: 12.5px; color: var(--muted); margin-top: 10px; }
-.mic-ans { margin-top: 10px; font-size: 14px; background: rgba(99,102,241,.1); border-radius: 10px; padding: 10px; border: 1px solid rgba(99,102,241,.25); }
-
-.fb-card {
-  margin-top: 10px; background: var(--card2); border-left: 4px solid var(--green);
-  border-radius: 12px; padding: 12px; font-size: 13.5px; line-height: 1.6;
-}
-.fb-band { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
-.fb-line { margin: 3px 0; }
