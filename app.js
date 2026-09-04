@@ -471,7 +471,7 @@ function showOralFeedback(qi,text,fb){
   fb.innerHTML=`
     <div class="fb-card" style="border-left-color:${bandColor};">
       <div class="fb-band" style="color:${bandColor};">${band} · ${score}/100</div>
-      <div class="fb-line">📝 Longitud: ${wordCount} palabras (${lengthOk?'bien':'corta — intenta dar más detalle')}</div>
+      <div class="fb-line">📝 Longitud: ${wordCount} palabras (${lengthOk?'bien':'corta — intenta dar más detalle'})</div>
       <div class="fb-line">🎯 Palabras clave acertadas: ${matched}/${uniqKws.length}</div>
       ${missed.length?`<div class="fb-line">💡 Intenta incluir: <b>${missed.join(', ')}</b></div>`:''}
       <button class="btn sm ghost" style="margin-top:8px;" onclick="speak('${(q.model||'').replace(/'/g,"\\'")}')">🔊 Oír respuesta modelo</button>

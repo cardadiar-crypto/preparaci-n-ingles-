@@ -386,7 +386,7 @@ DAYS.push({
       aspect: 'reading', title: 'Reading: Conversation with Tags',
       explain: {
         en: [
-          {t:'p', text:'<b>Text:</b> "You enjoyed the film, <b>didn\'t you</b>?" asked Tom. "Yes, it was great, <b>wasn\'t it</b>?" replied Maria. "But you\'ve seen it before, <b>haven\'t you</b>?" "That\'s true. You have a good memory, <b>don\'t you</b>?" Tom smiled. "We\'re going again tomorrow, <b>aren\'t we</b>? Let\'s book tickets, <b>shall we</b>?"'}
+          {t:'p', text:'<b>Text:</b> "You enjoyed the film, <b>didn\'t you</b>?" asked Tom. "Yes, it was great, <b>wasn\'t it</b>?" replied Maria. "But you\'ve seen it before, <b>haven\'t you</b>?" "That\'s true. You have a good memory, <b>don\'t you</b>?" Tom smiled. "We\'re going again tomorrow, <b>aren\'t we</b>? Let\'s book tickets, <b>shall we</b>?"'},
           {t:'tip', text:'Notice each tag confirms or checks information and matches the auxiliary of the statement.'}
         ],
         es: [
